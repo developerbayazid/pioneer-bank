@@ -8,19 +8,33 @@ document.getElementById('login').addEventListener('click', function() {
 
 //Deposit button event handler
 document.getElementById('addDeposit').addEventListener('click', function() {
-    const depositAmount = document.getElementById('depositAmount').value;
-    const depositNumber = parseFloat(depositAmount);
+    const depositNumber = getInputValue('depositAmount');
     
     balanceUpdate('currentDeposit', depositNumber);
     balanceUpdate('currentBalance', depositNumber);
-
     document.getElementById('depositAmount').value = "";
 
 });
 
-function balanceUpdate(id, depositNumber){
+//Withdraw button event handler
+document.getElementById('addWithdraw').addEventListener('click', function() {
+    const withdrawNumber = getInputValue('withdrawAmount');
+    balanceUpdate('currentWithdraw', withdrawNumber);
+    balanceUpdate('currentBalance', -1 * withdrawNumber);
+
+
+    document.getElementById('withdrawAmount').value = "";
+});
+
+//Functions
+function getInputValue(id){
+    const amount = document.getElementById(id).value;
+    const amountNumber = parseFloat(amount);
+    return amountNumber;
+}
+function balanceUpdate(id, number){
     const currentBalance = document.getElementById(id).innerText;
     const currentBalanceNumber = parseFloat(currentBalance);
-    const totalBalance = currentBalanceNumber + depositNumber;
+    const totalBalance = currentBalanceNumber + number;
     document.getElementById(id).innerText = totalBalance;
 }
