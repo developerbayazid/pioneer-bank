@@ -9,20 +9,25 @@ document.getElementById('login').addEventListener('click', function() {
 //Deposit button event handler
 document.getElementById('addDeposit').addEventListener('click', function() {
     const depositNumber = getInputValue('depositAmount');
-    
-    balanceUpdate('currentDeposit', depositNumber);
-    balanceUpdate('currentBalance', depositNumber);
+    if(depositNumber < 0){
+        alert("Negative amount cannot deposit");
+    } else {
+        balanceUpdate('currentDeposit', depositNumber);
+        balanceUpdate('currentBalance', depositNumber);
+    }
     document.getElementById('depositAmount').value = "";
-
+    
 });
 
 //Withdraw button event handler
 document.getElementById('addWithdraw').addEventListener('click', function() {
     const withdrawNumber = getInputValue('withdrawAmount');
-    balanceUpdate('currentWithdraw', withdrawNumber);
-    balanceUpdate('currentBalance', -1 * withdrawNumber);
-
-
+    if(withdrawNumber < 0){
+        alert('Negative amount cannot withdraw')
+    } else {
+        balanceUpdate('currentWithdraw', withdrawNumber);
+        balanceUpdate('currentBalance', -1 * withdrawNumber);
+    }
     document.getElementById('withdrawAmount').value = "";
 });
 
